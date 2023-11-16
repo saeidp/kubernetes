@@ -1,0 +1,19 @@
+# Docker 
+docker build -t my-hello-world .
+docker run -p 8080:80 my-hello-world
+
+# minikube - it has its own registery
+minikube image build -t my-mini-hello-world .
+minikube image ls
+kubectl create deployment my-hello-world --image my-hello-world --dry-run -o  yam >my-hello-world.yaml
+# add  imagePullPolicy: Never in the container part
+kubectl create -f my-hello-world.yaml
+kubectl get pods
+kubectl get deployments
+kubectl expose deployment my-hello-world --name=my-hello-world-svc --type=NodePort --port=80
+kubectl get svc
+minikube service my-hello-world-svc --url
+
+
+# delete image
+$ minikube image unload my-mini-hello-world

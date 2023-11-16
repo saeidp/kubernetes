@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-hello-world
+  name: my-hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-hello-world
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: my-hello-world
+    spec:
+      containers:
+      - image: my-hello-world
+        name: my-hello-world
+        imagePullPolicy: Never
+        resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: hello-world
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
