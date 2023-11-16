@@ -1,10 +1,12 @@
 # Docker 
 docker build -t my-hello-world .
-docker run -p 8080:80 my-hello-world
+docker run -p 8080:80 my-hello-world (only if you want to test it)
 
 # minikube - it has its own registery
 minikube image build -t my-mini-hello-world .
 minikube image ls
+# -----------------------------------------------
+# Create deployment and service manually
 kubectl create deployment my-hello-world --image my-hello-world --dry-run -o  yam >my-hello-world.yaml
 # add  imagePullPolicy: Never in the container part
 kubectl create -f my-hello-world.yaml
@@ -14,6 +16,11 @@ kubectl expose deployment my-hello-world --name=my-hello-world-svc --type=NodePo
 kubectl get svc
 minikube service my-hello-world-svc --url
 
-
 # delete image
 $ minikube image unload my-mini-hello-world
+
+# ----------------------------------------------
+# Using cdk8s then you only need to cd dist
+kubectl create -f deployment my-hello-world.k8s.yaml
+kubectl get svc
+minikube service <service name> --url

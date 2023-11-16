@@ -31,7 +31,7 @@ kind: Service
 metadata:
   name: hello-world-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: hello-world
   ports:
